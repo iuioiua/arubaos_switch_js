@@ -43,7 +43,8 @@ export class Client {
   }
 
   async request(path: string, init?: RequestInit): Promise<Response> {
-    const request = new Request(this.#baseURL + path, init);
+    const url = new URL(path, this.#baseURL);
+    const request = new Request(url.toString(), init);
     request.headers.set("cookie", this.#cookie!);
     return await fetch(request);
   }
