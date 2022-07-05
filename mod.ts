@@ -43,8 +43,7 @@ export class Client {
   }
 
   async request(path: string, init?: RequestInit): Promise<Response> {
-    const url = new URL(path, this.#baseURL);
-    const request = new Request(url.toString(), init);
+    const request = new Request(this.#baseURL + path, init);
     request.headers.set("cookie", this.#cookie!);
     return await fetch(request);
   }
@@ -64,8 +63,8 @@ export class Client {
         password: this.#password,
       }),
     );
-    const { message } = await response.json();
-    assert(response.ok, message);
+    const body = await response.json();
+    assert(response.ok, body.message);
     this.#cookie = getSetCookie(response.headers);
   }
 

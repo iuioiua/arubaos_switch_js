@@ -1,5 +1,5 @@
 {
   "tasks": {
-    "test": "deno test --allow-env --allow-net --unsafely-ignore-certificate-errors"
+    "test": "deno test --allow-env --allow-net"
   }
 }
